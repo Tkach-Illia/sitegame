@@ -1,14 +1,25 @@
 "use client"
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 
-const MovingComponent: React.FC = () => {
+type Props = {
+  topCord: number;
+  setLeftCord: Dispatch<SetStateAction<number>>;
+};
+
+const MovingComponent: React.FC<Props> = ({topCord, setLeftCord}) => {
   const [position, setPosition] = useState(0);
 
   const springProps = useSpring({
     to: { left: position },
     config: { tension: 120, friction: 25 },
   });
+
+  useEffect(  
+    ()=>{
+      setLeftCord(position);
+    },[position]
+  )
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'ArrowRight') {
@@ -23,7 +34,7 @@ const MovingComponent: React.FC = () => {
       style={{
         position: 'absolute',
         ...springProps,
-        top: 50,
+        top: topCord,
         width: 50,
         height: 50,
         background: 'red',

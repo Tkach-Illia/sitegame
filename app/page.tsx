@@ -6,6 +6,8 @@ import MovingComponent from "./components/MovingComponent";
 export default function Home() {
 
   const [time, setTime] = useState(0);
+  const [leftCord, setLeftCord] = useState(0);
+  const topCord = window.innerHeight / 3 * 2 ;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -19,8 +21,8 @@ export default function Home() {
   
   return (
     <div>
-      <Letters time={time} />
-      <MovingComponent />
+      <Letters time={time} topCord={topCord} leftCord={leftCord}/>
+      <MovingComponent topCord={topCord} setLeftCord={setLeftCord}/>
     </div>
   )
 }
