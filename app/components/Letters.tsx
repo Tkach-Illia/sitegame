@@ -17,15 +17,21 @@ export default function Letters( {time}: Props ) {
 
   useEffect(  
     ()=>{
+      setLetterList(updatedArray);
       if(time%10===0){
         const left = Math.floor(Math.random() * window.innerWidth) + 1;
         const letter: Letter = { left: left, top: 0, letter: "f" };
         setLetterList((prevLetterList) => [...prevLetterList, letter]);
+        console.log(letterList);
       }
-
+      console.log(time);
 
     },[time]
   )
+
+  const updatedArray: Letter[] = letterList.map((element: Letter) => {
+    return {left:element.left, top: element.top + 3, letter: element.letter};
+  });
 
   return (
     <div>
