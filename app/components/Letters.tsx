@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import AnimatedLetter from "./AnimatedLetter";
 
 interface Letter{
   left: number,
@@ -22,30 +23,19 @@ export default function Letters( {time}: Props ) {
         const left = Math.floor(Math.random() * window.innerWidth) + 1;
         const letter: Letter = { left: left, top: 0, letter: "f" };
         setLetterList((prevLetterList) => [...prevLetterList, letter]);
-        console.log(letterList);
       }
-      console.log(time);
 
     },[time]
   )
 
   const updatedArray: Letter[] = letterList.map((element: Letter) => {
-    return {left:element.left, top: element.top + 3, letter: element.letter};
+    return {left:element.left, top: element.top + 25, letter: element.letter};
   });
 
   return (
     <div>
-      {letterList.map((item) => (
-        <div 
-          key={item.left} 
-          style={{
-            position: 'absolute',
-            top: item.top,
-            left: item.left,
-          }}
-        >
-          <p>{item.letter}</p>
-        </div>
+      {letterList.map((item) => (        
+      <AnimatedLetter key={item.left} left={item.left} top={item.top} letter={item.letter} />
       ))}
     </div>
   )
